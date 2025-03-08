@@ -6,8 +6,17 @@ public class InputManager : MonoBehaviour
     public UnityEvent<Vector2> OnMove = new();
     public UnityEvent OnJump = new();
     public UnityEvent OnDash = new();
+    public UnityEvent OnSettingsMenu = new();
     void Update()
     {
+        //this two is about the setting menu, should work at first
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OnSettingsMenu?.Invoke();
+        }
+        //avoid any operation when the setting menu is opend
+        if (GameManager.Instance.IsSettingsMenuActive) return;
+
         Vector2 input = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
